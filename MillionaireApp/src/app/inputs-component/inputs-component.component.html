@@ -1,0 +1,9 @@
+Current Age : <input #currentAge type="number" id="currentAge">
+Desired Millionaire Age : <input #millionAge type="number" id="millionarieAge">
+<div style="margin-top: 15px;">
+    <button (click)="calculateMillion(currentAge.value, millionAge.value)">Calculate</button>
+</div>
+<hr/>
+<h3 
+    style="font-size: xx-large; color:green; animation-name: example; animation-duration: 4s; animation-iteration-count: infinite;" 
+    *ngIf="moneyNeeded">{{moneyNeeded}}</h3>

@@ -1,0 +1,7 @@
+@keyframes example {
+    100%   {background-color:#ffdb1a;}
+    75%  {background-color:#ffe34d; transform: scale(1, -1);}
+    50%  {background-color:#ffeb80; transform: scale(1, 1);}
+    25%  {background-color:#fff3b3; transform: scale(1, -1);}
+    0% {background-color:#e6c200; transform: scale(1, 1);}
+}
