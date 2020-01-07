@@ -1,9 +1,10 @@
-Current Age : <input #currentAge type="number" id="currentAge">
-Desired Millionaire Age : <input #millionAge type="number" id="millionarieAge">
-<div style="margin-top: 15px;">
+<div style="margin-top: 20px;">
+Current Age : <mat-slider #currentAge thumbLabel min="1" max="100" step="1" value="25"></mat-slider>
+Desired Millionaire Age : <mat-slider #millionAge thumbLabel min="1" max="100" step="1" value="65"></mat-slider>
+</div>
+<div style="margin-top: 20px;">
     <button (click)="calculateMillion(currentAge.value, millionAge.value)">Calculate</button>
 </div>
 <hr/>
-<h3 
-    style="font-size: xx-large; color:green; animation-name: example; animation-duration: 4s; animation-iteration-count: infinite;" 
-    *ngIf="moneyNeeded">{{moneyNeeded}}</h3>
+<h3 style="font-size: xx-large; color:green; background:gold" *ngIf="moneyNeeded">{{moneyNeeded}} </h3>
+<app-growth-table-component *ngIf="moneyNeeded"></app-growth-table-component>
