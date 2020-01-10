@@ -1,10 +1,16 @@
 <div style="margin-top: 20px;">
 Current Age : <mat-slider #currentAge thumbLabel min="1" max="100" step="1" value="25"></mat-slider>
 Desired Millionaire Age : <mat-slider #millionAge thumbLabel min="1" max="100" step="1" value="65"></mat-slider>
+Current Savings : <mat-slider #currentSavings thumbLabel min="1" max="100" step="1" value="65"></mat-slider>
 </div>
 <div style="margin-top: 20px;">
     <button (click)="calculateMillion(currentAge.value, millionAge.value)">Calculate</button>
 </div>
 <hr/>
 <h3 style="font-size: xx-large; color:green; background:gold" *ngIf="moneyNeeded">{{moneyNeeded}} </h3>
-<app-growth-table-component *ngIf="moneyNeeded"></app-growth-table-component>
+<div style="float: left;">
+    <app-growth-table-component *ngIf="moneyNeeded"></app-growth-table-component>
+</div>
+<div>
+    <app-graph-component [graphData]=data [svgWidth]="600" [svgHeight]="800" *ngIf="moneyNeeded"></app-graph-component>
+</div>

@@ -8,12 +8,14 @@ import { AppComponent } from './app.component';
 import { InputsComponentComponent } from './inputs-component/inputs-component.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GrowthTableComponentComponent } from './growth-table-component/growth-table-component.component';
+import { GraphComponentComponent } from './graph-component/graph-component.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     InputsComponentComponent,
-    GrowthTableComponentComponent
+    GrowthTableComponentComponent,
+    GraphComponentComponent
   ],
   imports: [
     BrowserModule,

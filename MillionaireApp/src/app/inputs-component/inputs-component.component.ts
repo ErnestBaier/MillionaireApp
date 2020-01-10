@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {placeholderData, InvestmentDataPoint} from '../models/InvestmentDataPoint';
 
 @Component({
   selector: 'app-inputs-component',
@@ -8,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class InputsComponentComponent implements OnInit {
 
   moneyNeeded : any;
+  data = placeholderData;
   constructor() {}
 
   public calculateMillion(currentAge : number, millionAge : number) {
