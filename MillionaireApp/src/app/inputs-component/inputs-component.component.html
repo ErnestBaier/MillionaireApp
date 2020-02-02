@@ -1,0 +1,23 @@
+<h3>How much money do you need today to be a Millionaire in the future?</h3>
+<h3>Place in your numbers below to find out.</h3>  
+<hr/>
+<form>
+    <mat-form-field>
+        <input type="number" matInput #currentAge placeholder="Current Age" [formControl]="age" required>
+        <mat-error *ngIf="age.invalid">{{getErrorMessage()}}</mat-error>
+        <mat-hint>In Years</mat-hint>
+    </mat-form-field>
+    <mat-form-field>
+        <input type="number" matInput #millionAge placeholder="Millionaire Age" [formControl]="mAge" required>
+        <mat-error *ngIf="mAge.invalid">{{getErrorMessage()}}</mat-error>
+        <mat-hint>In Years</mat-hint>
+    </mat-form-field>
+    <button style="margin-left: 10px;" type="button" mat-raised-button color="primary" (click)="calculateMillion(currentAge.value, millionAge.value)" [disabled]="age.invalid || mAge.invalid" >Calculate</button>
+    <mat-error *ngIf="incorrectOrder">Millionaire age must be older than current age. </mat-error>
+</form>
+<div style="text-align:center; margin-top: 20px; min-width: 850; min-height: 600;">
+    <div *ngIf="moneyNeeded">If you are able to invest {{moneyNeeded}} in the stock market today, your money will be worth $1,000,000 by the time you are {{millionAge.value}}</div>
+    <app-graph-component [graphData]=data [svgWidth]="850" [svgHeight]="600" *ngIf="moneyNeeded" style="margin-top: 10px;"></app-graph-component>
+    <div *ngIf="moneyNeeded">Don't have {{moneyNeeded}} today? No worries! Check out our <a routerLink="/resrouces" routerLinkActive="active" mat-raised-button color="primary">Additional Resources</a> to learn about other ways to grow your money.</div>
+    <div *ngIf="moneyNeeded">Interested in how this was calculated? Head over to <a routerLink="/info" routerLinkActive="active" mat-raised-button color="primary">Calculation Info</a></div>
+</div>
