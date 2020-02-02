@@ -20,9 +20,7 @@ export class GraphComponentComponent implements OnInit {
 	@Input() svgWidth : number;
 	@Input() svgHeight : number;
 
-	title = 'How Your Money Will Grow!';
-
-	private margin = {top: 20, right: 50, bottom: 20, left: 50};
+	private margin = {top: 50, right: 50, bottom: 50, left: 50};
 	private width: number;
 	private height: number;
 	private x: any;
@@ -33,11 +31,12 @@ export class GraphComponentComponent implements OnInit {
 
 	constructor() {
 		this.graphData = placeholderData;
-		this.width = 800 - this.margin.left - this.margin.right;
 		this.height = 500 - this.margin.top - this.margin.bottom;
 	}
 
 	ngOnInit() {
+		this.width = this.svgWidth - this.margin.left - this.margin.right;
+		this.height = this.svgHeight - this.margin.top - this.margin.bottom;
 		this.initSvg();
 		this.initAxis();
 		this.drawAxis();
@@ -51,14 +50,14 @@ export class GraphComponentComponent implements OnInit {
 			.append('g')
 			.attr('id','graphGroup')
 			.attr('transform', 'translate(' + this.margin.left + ',' + this.margin.top + ')')
-			//.style('fill', 'green')
 	}
 
 	//Method to scale axis with data
 	private initAxis() {
-		this.x = d3Scale.scaleLinear().range([0, this.width]);
+		this.x = d3Scale.scaleLinear().range([0, this.width - this.margin.left]);
 		this.y = d3Scale.scaleLinear().range([this.height, 0]);
-		this.x.domain(d3Array.extent(this.graphData, (d : any) => d.age));
+		let dfg = this.x.domain(d3Array.extent(this.graphData, (d : any) => d.age));
+		console.log(this.graphData);
 		this.y.domain(d3Array.extent(this.graphData, (d : any) => d.principal));
 	}
 
@@ -66,24 +65,25 @@ export class GraphComponentComponent implements OnInit {
 		//Append x-axis
 		this.svg.append('g')
 			.attr('class', 'axis axis--x')
-			.attr('transform', 'translate(0,' + this.height + ')')
+			.attr('transform', 'translate('+this.margin.left+ ',' + this.height + ')')
 			.call(d3Axis.axisBottom(this.x));
 		//Add title to x-axis
 		this.svg.append("text")
 			.attr("transform",
 						"translate(" + (this.width/2) + " ," + 
-													 (this.height + this.margin.top + 20) + ")")
+													 (this.height + this.margin.top-10) + ")")
 			.style("text-anchor", "middle")
 			.text("Age (Yrs)");
 		//Append y-axis
 		this.svg.append('g')
 			.attr('class', 'axis axis--y')
+			.attr('transform', 'translate(' + this.margin.left + ',0)')
 			.call(d3Axis.axisLeft(this.y))
-			.append('text')
-			.attr('class', 'axis-title')
-			.attr('transform', 'rotate(-90)')
-			.attr('y', 6)
-			.attr('dy', '.71em')
+			// .append('text')
+			// .attr('class', 'axis-title')
+			// .attr('transform', 'rotate(-90)')
+			// .attr('y', )
+			// .attr('dy', '.71em')
 		//Add title to y-axis
 		this.svg.append("text")
 			.attr("transform", "rotate(-90)")
@@ -107,7 +107,7 @@ export class GraphComponentComponent implements OnInit {
 			.attr('cy', (d: any,i: number) => {
 				return this.y(d.principal);
 			})
-			.attr('fill', 'green')
+			.attr('fill', 'rgb(63, 81, 181)')
 			.attr('id', (d: any,i: number) => {
 				return 'circle'+i;
 			})
@@ -115,6 +115,7 @@ export class GraphComponentComponent implements OnInit {
 				d3.select('#circle'+i)
 				.text('Age:' + d.age + 'Principal:' + d.principal )
 			})
+			.attr('transform', 'translate(' + this.margin.left + ',0)')
 	}
 	private drawLine() {
 		this.line = d3Curve.line()
@@ -128,8 +129,9 @@ export class GraphComponentComponent implements OnInit {
 		let pathData = this.line(this.graphData);
 		this.svg.append('path')
 			.attr('d', pathData)
-			.attr('stroke', 'green')
+			.attr('stroke', 'rgb(63, 81, 181)')
 			.attr('stroke-width', '5')
 			.attr('fill', 'none')
+			.attr('transform', 'translate(' + this.margin.left + ',0)')
 	}
 }
