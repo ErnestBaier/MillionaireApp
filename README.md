@@ -1,5 +1,5 @@
 # MillionaireApp
-This repo contains all file relevant to the "How Much To Be A Millionaire" Angular App
+This repo contains all files relevant to the "How Much To Be A Millionaire" Angular App
 
 This application is intended to be used as a portfolio piece and as a learning opportunity. 
 
